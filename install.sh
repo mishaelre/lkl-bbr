@@ -89,9 +89,11 @@ elif [[ "${release}" == "Debian" && "$ver" == "7" ]]; then
 	apt-key update
 	apt-get update
 	apt-get install -y haproxy
+	update-rc.d haproxy disable
 else
 	apt-get update
 	apt-get install -y haproxy
+	update-rc.d haproxy disable
 fi
 
 mkdir /root/lkl
