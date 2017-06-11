@@ -230,7 +230,7 @@ cat > /root/shadowsocksr/user-config.json<<-EOF
 EOF
 
 
-cat > /etc/init.d/shadowsocks<<-EOF
+cat > /etc/init.d/shadowsocks<<EOF
 #!/bin/sh
 # chkconfig: 2345 90 10
 # description: Start or stop the Shadowsocks R server
@@ -309,7 +309,6 @@ case "$1" in
     ;;
 esac
 exit $RETVAL
-
 EOF
 
 chmod 755 /etc/init.d/shadowsocks ; update-rc.d shadowsocks defaults ; service shadowsocks start
