@@ -199,6 +199,7 @@ EOF
 
 chmod +x /etc/rc.local;echo "sh /root/kcptun/start.sh" >> /etc/rc.local
 
+cd /root
 apt-get install git
 git clone -b manyuser https://github.com/shadowsocksr/shadowsocksr.git
 bash /root/shadowsocksr/initcfg.sh
@@ -228,6 +229,20 @@ EOF
 
 cat > /etc/init.d/shadowsocks<<-EOF
 #!/bin/sh
+# chkconfig: 2345 90 10
+# description: Start or stop the Shadowsocks R server
+#
+### BEGIN INIT INFO
+# Provides: Shadowsocks-R
+# Required-Start: $network $syslog
+# Required-Stop: $network
+# Default-Start: 2 3 4 5
+# Default-Stop: 0 1 6
+# Description: Start or stop the Shadowsocks R server
+### END INIT INFO
+
+# Author: Yvonne Lu(Min) <min@utbhost.com>
+
 name=shadowsocks
 PY=/usr/bin/python
 SS=/root/shadowsocksr/shadowsocks/server.py
