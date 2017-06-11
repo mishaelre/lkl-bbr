@@ -137,7 +137,7 @@ iptables -t nat -A PREROUTING -i venet0 -p tcp --dport 12420 -j DNAT --to-destin
 nohup /root/lkl/lkl.sh &
 
 p=\`ping 10.0.0.2 -c 3 | grep ttl\`
-if [ \$? -eq 0 ]; then
+if [ $? -eq 0 ]; then
 	echo "success "\$(date '+%Y-%m-%d %H:%M:%S') > /root/lkl/log.log
 else
 	echo "fail "\$(date '+%Y-%m-%d %H:%M:%S') > /root/lkl/log.log
