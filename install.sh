@@ -200,7 +200,7 @@ EOF
 chmod +x /etc/rc.local;echo "sh /root/kcptun/start.sh" >> /etc/rc.local
 
 cd /root
-apt-get install git
+apt-get install -y git
 git clone -b manyuser https://github.com/shadowsocksr/shadowsocksr.git
 bash /root/shadowsocksr/initcfg.sh
 rm -f /root/shadowsocksr/user-config.json
@@ -311,7 +311,7 @@ EOF
 
 chmod 755 /etc/init.d/shadowsocks ; update-rc.d shadowsocks defaults ; service shadowsocks start
 
-apt-get install cron
+apt-get install -y cron
 
 #判断是否启动
 p=`ping 10.0.0.2 -c 3 | grep ttl`
