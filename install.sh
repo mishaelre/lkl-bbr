@@ -205,6 +205,29 @@ cd /root
 apt-get install git
 git clone -b manyuser https://github.com/shadowsocksr/shadowsocksr.git
 bash /root/shadowsocksr/initcfg.sh
+rm -f /root/shadowsocksr/user-config.json
+cat > /root/shadowsocksr/user-config.json<<-EOF
+{
+    "server":"0.0.0.0",
+    "server_ipv6":"::",
+    "local_address":"127.0.0.1",
+    "local_port":1080,
+    "port_password":{
+        "12420":{"protocol":"origin", "password":"133hhlovell!"}
+    },
+    "timeout":300,
+    "method":"rc4-md5",
+    "protocol": "origin",
+    "protocol_param": "",
+    "obfs": "tls1.2_ticket_auth",
+    "obfs_param": "",
+    "redirect": "",
+    "dns_ipv6": false,
+    "fast_open": false,
+    "workers": 1
+}
+
+EOF
 
 
 cat > /etc/init.d/shadowsocks<<-EOF
@@ -291,6 +314,7 @@ EOF
 
 chmod 755 /etc/init.d/shadowsocks ; update-rc.d shadowsocks defaults ; service shadowsocks start
 
+apt-get install cron
 
 #判断是否启动
 p=`ping 10.0.0.2 -c 3 | grep ttl`
