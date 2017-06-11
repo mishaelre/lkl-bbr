@@ -1,13 +1,6 @@
 #! /bin/bash
 PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~/bin
 export PATH
-#=================================================================#
-#   System Required:  CentOS ubuntu Debian                                    #
-#   Description: One click Install lkl                #
-#   Author: 91yun <https://twitter.com/91yun>                     #
-#   Thanks: @allient neko                               #
-#   Intro:  https://www.91yun.org                                 #
-#=================================================================#
 
 if [[ $EUID -ne 0 ]]; then
    echo "Error:This script must be run as root!" 1>&2
