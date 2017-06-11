@@ -1,6 +1,13 @@
 #! /bin/bash
 PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~/bin
 export PATH
+#=================================================================#
+#   System Required:  CentOS ubuntu Debian                                    #
+#   Description: One click Install lkl                #
+#   Author: 91yun <https://twitter.com/91yun>                     #
+#   Thanks: @allient neko                               #
+#   Intro:  https://www.91yun.org                                 #
+#=================================================================#
 
 if [[ $EUID -ne 0 ]]; then
    echo "Error:This script must be run as root!" 1>&2
@@ -82,11 +89,9 @@ elif [[ "${release}" == "Debian" && "$ver" == "7" ]]; then
 	apt-key update
 	apt-get update
 	apt-get install -y haproxy
-  update-rc.d haproxy disable
 else
 	apt-get update
 	apt-get install -y haproxy
-  update-rc.d haproxy disable
 fi
 
 mkdir /root/lkl
@@ -111,7 +116,7 @@ server server1 10.0.0.1 maxconn 20480
 
 EOF
 	
-wget --no-check-certificate https://drive.google.com/open?id=0B9nEQVxNYKsqRGlMZEtkMVNFODQ
+wget --no-check-certificate http://soft.91yun.org/uml/lkl/liblkl-hijack.so
 
 cat > /root/lkl/lkl.sh<<-EOF
 LD_PRELOAD=/root/lkl/liblkl-hijack.so LKL_HIJACK_NET_QDISC="root|fq" LKL_HIJACK_SYSCTL="net.ipv4.tcp_congestion_control=bbr;net.ipv4.tcp_wmem=4096 16384 30000000" LKL_HIJACK_OFFLOAD="0x9983" LKL_HIJACK_NET_IFTYPE=tap LKL_HIJACK_NET_IFPARAMS=lkl-tap LKL_HIJACK_NET_IP=10.0.0.2 LKL_HIJACK_NET_NETMASK_LEN=24 LKL_HIJACK_NET_GATEWAY=10.0.0.1 haproxy -f /root/lkl/haproxy.cfg
