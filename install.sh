@@ -2,11 +2,10 @@
 PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~/bin
 export PATH
 #=================================================================#
-#   System Required:  CentOS ubuntu Debian                                    #
-#   Description: One click Install lkl                #
-#   Author: 91yun <https://twitter.com/91yun>                     #
-#   Thanks: @allient neko                               #
-#   Intro:  https://www.91yun.org                                 #
+#   System Required:  Debian8_x64                                   #
+#   Description: One click Install lkl-bbr kcp               #
+#   Adapt from: 91yun <https://twitter.com/91yun>                     #
+#   Thanks: @allient neko   @linrong                            #
 #=================================================================#
 
 if [[ $EUID -ne 0 ]]; then
@@ -138,7 +137,7 @@ iptables -t nat -A PREROUTING -i venet0 -p tcp --dport 12420 -j DNAT --to-destin
 nohup /root/lkl/lkl.sh &
 
 p=\`ping 10.0.0.2 -c 3 | grep ttl\`
-if [ \$? -ne 0 ]; then
+if [ \$? -eq 0 ]; then
 	echo "success "\$(date '+%Y-%m-%d %H:%M:%S') > /root/lkl/log.log
 else
 	echo "fail "\$(date '+%Y-%m-%d %H:%M:%S') > /root/lkl/log.log
@@ -175,7 +174,7 @@ echo "Kcptun started."
 
 EOF
 
-cat > /root/kcptun/start.sh<<-EOF
+cat > /root/kcptun/server-config.json<<-EOF
 {
     "listen": ":20900",
     "target": "127.0.0.1:12420",
