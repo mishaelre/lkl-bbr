@@ -171,7 +171,6 @@ cat > /root/kcptun/start.sh<<-EOF
 cd /root/kcptun/
 ./server_linux_amd64 -c /root/kcptun/server-config.json > kcptun.log 2>&1 &
 echo "Kcptun started."
-
 EOF
 
 cat > /root/kcptun/server-config.json<<-EOF
@@ -196,12 +195,10 @@ cat > /root/kcptun/server-config.json<<-EOF
     "sockbuf": 4194304,
     "keepalive": 10
 }
-
 EOF
 
 chmod +x /etc/rc.local;echo "sh /root/kcptun/start.sh" >> /etc/rc.local
 
-cd /root
 apt-get install git
 git clone -b manyuser https://github.com/shadowsocksr/shadowsocksr.git
 bash /root/shadowsocksr/initcfg.sh
@@ -226,25 +223,11 @@ cat > /root/shadowsocksr/user-config.json<<-EOF
     "fast_open": false,
     "workers": 1
 }
-
 EOF
 
 
-cat > /etc/init.d/shadowsocks<<EOF
+cat > /etc/init.d/shadowsocks<<-EOF
 #!/bin/sh
-# chkconfig: 2345 90 10
-# description: Start or stop the Shadowsocks R server
-#
-### BEGIN INIT INFO
-# Provides: Shadowsocks-R
-# Required-Start: $network $syslog
-# Required-Stop: $network
-# Default-Start: 2 3 4 5
-# Default-Stop: 0 1 6
-# Description: Start or stop the Shadowsocks R server
-### END INIT INFO
-
-
 name=shadowsocks
 PY=/usr/bin/python
 SS=/root/shadowsocksr/shadowsocks/server.py
