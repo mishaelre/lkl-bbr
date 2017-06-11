@@ -162,6 +162,46 @@ fi
 
 ./run.sh
 
+mkdir /root/kcptun
+cd /root/kcptun
+wget https://github.com/xtaci/kcptun/releases/download/v20170329/kcptun-linux-amd64-20170329.tar.gz
+tar -zxf kcptun-linux-amd64-*.tar.gz
+
+cat > /root/kcptun/start.sh<<-EOF
+#!/bin/bash
+cd /root/kcptun/
+./server_linux_amd64 -c /root/kcptun/server-config.json > kcptun.log 2>&1 &
+echo "Kcptun started."
+
+EOF
+
+cat > /root/kcptun/start.sh<<-EOF
+{
+    "listen": ":20900",
+    "target": "127.0.0.1:12420",
+    "key": "kcpforvir",
+    "crypt": "salsa20",
+    "mode": "normal",
+    "mtu": 1350,
+    "sndwnd": 1024,
+    "rcvwnd": 1024,
+    "datashard": 70,
+    "parityshard": 30,
+    "dscp": 46,
+    "nocomp": false,
+    "acknodelay": false,
+    "nodelay": 0,
+    "interval": 40,
+    "resend": 0,
+    "nc": 0,
+    "sockbuf": 4194304,
+    "keepalive": 10
+}
+
+EOF
+
+chmod +x /etc/rc.local;echo "sh /root/kcptun/start.sh" >> /etc/rc.local
+
 #判断是否启动
 p=`ping 10.0.0.2 -c 3 | grep ttl`
 if [ "$p" == "" ]; then
