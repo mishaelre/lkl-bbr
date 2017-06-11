@@ -163,7 +163,7 @@ fi
 
 mkdir /root/kcptun
 cd /root/kcptun
-wget https://github.com/xtaci/kcptun/releases/download/v20170329/kcptun-linux-amd64-20170329.tar.gz
+wget --no-check-certificate https://github.com/xtaci/kcptun/releases/download/v20170329/kcptun-linux-amd64-20170329.tar.gz
 tar -zxf kcptun-linux-amd64-*.tar.gz
 
 cat > /root/kcptun/start.sh<<-EOF
