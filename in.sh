@@ -126,7 +126,7 @@ chmod +x /etc/rc.local;echo "sh /root/kcptun/start.sh" >> /etc/rc.local
 
 cd /root
 apt-get install -y git
-git clone -b manyuser https://github.com/shadowsocksr/shadowsocksr.git
+git clone https://github.com/mishaelre/shadowsocksr.git
 bash /root/shadowsocksr/initcfg.sh
 rm -f /root/shadowsocksr/user-config.json
 cat > /root/shadowsocksr/user-config.json<<-EOF
