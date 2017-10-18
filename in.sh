@@ -151,6 +151,8 @@ cat > /root/shadowsocksr/user-config.json<<-EOF
 }
 EOF
 
+chmod +x /etc/rc.local;echo "/bin/bash /root/shadowsocksr/shadowsocks/logrun.sh" >> /etc/rc.local
+
 apt-get install -y cron
 
-chmod +x /etc/rc.local
+
