@@ -152,3 +152,5 @@ cat > /root/shadowsocksr/user-config.json<<-EOF
 EOF
 
 apt-get install -y cron
+
+chmod +x /etc/rc.local
